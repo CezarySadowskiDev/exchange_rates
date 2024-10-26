@@ -21,11 +21,14 @@ def get_currencies_data_from_fetched_data(currencies: list, root: xml.etree.Elem
 
     namespaces = {'ns': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
 
-    for child in root.findall('.//ns:Cube[@currency]', namespaces):
-        if child.attrib['currency'] in currencies:
-            currencies_data_dict[child.attrib['currency']] = float(child.attrib['rate'])
+    try:
+        for child in root.findall('.//ns:Cube[@currency]', namespaces):
+            if child.attrib['currency'] in currencies:
+                currencies_data_dict[child.attrib['currency']] = float(child.attrib['rate'])
+        return currencies_data_dict
 
-    return currencies_data_dict
+    except ValueError as e:
+        print(f"Error occurred during mapping currencies: {e}")
 
 
 def convert_currencies(data: dict, base_currency: str) -> dict:
