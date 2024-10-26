@@ -18,7 +18,6 @@ def fetch_data() -> xml.etree.ElementTree.Element:
 
 def get_currencies_data_from_fetched_data(currencies: list, root: xml.etree.ElementTree.Element) -> dict:
     currencies_data_dict = {}
-
     namespaces = {'ns': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
 
     try:
